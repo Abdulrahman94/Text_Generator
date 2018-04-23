@@ -532,7 +532,10 @@ def get_prediction(forward_gen, backward_gen, sentence):
     b_set = []
     result = ''
     for i in s:
-        result += i + ' '
+        if i == 'END':
+            result += '. '
+        elif i != 'START':
+            result += i + ' '
     result += '\n'
     if index == len(s)-1:
         forward = s[:index]
@@ -547,10 +550,10 @@ def get_prediction(forward_gen, backward_gen, sentence):
     for i in f_set:
         for j in b_set:
             if i[1] >= j[1]:
-                result += '{0}- {1}: {2} \n'.format(num+1, i[0], 100*i[1])
+                result += '{0}- {1}: {2:.2f} \n'.format(num+1, i[0], 100*i[1])
                 num += 1
             else:
-                result += '{0}- {1}: {2} \n'.format(num+1, j[0], 100*j[1])
+                result += '{0}- {1}: {2:.2f} \n'.format(num+1, j[0], 100*j[1])
                 num += 1
             if num == 5:
                 break
