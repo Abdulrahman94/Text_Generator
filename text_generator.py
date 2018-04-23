@@ -12,7 +12,7 @@ from keras.layers import LSTM
 from keras.layers import GRU
 from keras.layers import Dropout
 from keras.models import load_model
-from Text_Generator import harakat
+import harakat
 
 import random
 
