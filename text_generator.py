@@ -550,11 +550,11 @@ def get_prediction(forward_gen, backward_gen, sentence):
     for i in f_set:
         for j in b_set:
             if i[1] >= j[1]:
-                result += '{0}- {1}: {2:.2f} \n'.format(num+1, i[0], 100*i[1])
+                result += '{0}- {1} بنسبة {2:.2f} \n'.format(num+1, i[0], 100*i[1])
                 num += 1
                 break
             else:
-                result += '{0}- {1}: {2:.2f} \n'.format(num+1, j[0], 100*j[1])
+                result += '{0}- {1} بنسبة {2:.2f} \n'.format(num+1, j[0], 100*j[1])
                 num += 1
             if num == 5:
                 break
