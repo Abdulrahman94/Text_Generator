@@ -243,7 +243,7 @@ class DocumentProcessor:
         the path must end with "/"
         '''
 
-        saving = (self.document_path, self.encode, self.int_to_word, self.word_to_vec, self.word_to_int, self.size, self.vec_num)
+        saving = (self.corpus, self.document_path, self.encode, self.int_to_word, self.word_to_vec, self.word_to_int, self.size, self.vec_num)
         file = open(path+name,'wb')
         pickle.dump(saving, file)
         file.close()
@@ -259,7 +259,7 @@ class DocumentProcessor:
         '''
 
         file = open(path+name,'rb')
-        self.document_path, self.encode, self.int_to_word, self.word_to_vec, self.word_to_int, self.size, self.vec_num = pickle.load(file)
+        self.corpus, self.document_path, self.encode, self.int_to_word, self.word_to_vec, self.word_to_int, self.size, self.vec_num = pickle.load(file)
         file.close()
 
 class WordGenerator:
