@@ -305,12 +305,23 @@ class WordGenerator:
         '''
         self.generator.fit(x_train, y_train, epochs=epochs_n, batch_size=batch_n)
     
+    def train_for_fit(self, data, batch, document_p, time, e_batch, epochs):
+        self.generator.fit_generator(self.generator_for_fit(data, batch, document_p, time),
+        steps_per_epoch=e_batch, epochs=epochs)
+        
     def generate(self, data):
         '''
         this method is to generate a word for a giving data
         '''
         return self.generator.predict(data)
 
+    def generator_for_fit(self, data, batch, document_p, time):
+        index = 0
+        while True:
+            sample = data[index:index+batch]
+            index += batch
+            x,y = document_p.get_training_data(time_step = time, reverse=False)
+            yield x,y
     def save(self, path='', name=''):
         '''
         this method is for saving the model under the name gene generator.h5
