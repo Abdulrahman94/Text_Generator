@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 # -*- coding=utf-8 -*-
 
-import nltk
-import gensim
 import logging
 import numpy as np
 import pickle
@@ -46,6 +44,8 @@ class DocumentProcessor:
         self.vec_num = 0
 
     def process_document(self, vec_num=32, mode=1, count_num=10, token=False):
+        import nltk
+        import gensim
         '''
         this is the main method, it will train the data to initalize int_to_word, word_to_vec
         and to initialize the ANN model and train it.
