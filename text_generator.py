@@ -307,7 +307,7 @@ class WordGenerator:
     
     def train_for_fit(self, data, batch, document_p, time, e_batch, epochs):
         self.generator.fit_generator(self.generator_for_fit(data, batch, document_p, time),
-        steps_per_epoch=e_batch, epochs=epochs)
+        steps_per_epoch=e_batch, epochs=epochs, use_multiprocessing=True)
                                     	
     def generate(self, data):
         '''
