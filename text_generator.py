@@ -594,7 +594,7 @@ def get_prediction(forward_gen, backward_gen, sentence):
         if num == 5:
                 break
     for x in result_set:
-        result += '{0}\tبنسبة\t{1:.2f}%\n'.format(x[0], 100*(x[1]/n_sum))
+        result += '\t[%{1:.2f}]\t\t[{0}]\n'.format(x[0], 100*(x[1]/n_sum))
     return result
 
 
