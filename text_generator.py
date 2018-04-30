@@ -308,7 +308,7 @@ class WordGenerator:
     def train_for_fit(self, data, batch, document_p, time, e_batch, epochs):
         self.generator.fit_generator(self.generator_for_fit(data, batch, document_p, time),
         steps_per_epoch=e_batch, epochs=epochs)
-        
+                                    	
     def generate(self, data):
         '''
         this method is to generate a word for a giving data
@@ -317,10 +317,23 @@ class WordGenerator:
 
     def generator_for_fit(self, data, batch, document_p, time):
         index = 0
+        flag = False
         while True:
-            sample = data[index:index+batch]
-            index += batch
-            x,y = document_p.get_training_data(time_step = time, reverse=False)
+            if flag:
+                index = 0
+                sample = data[index:index+batch]
+                index += 1
+                flag = False
+                #print("Hello2")
+            else:
+                sample = data[index:index+batch]
+                index += 1
+            if len(sample)<(time+2):
+                #print("Hello")
+                sample = data[-(batch):]
+                flag = True
+            x,y = document_p.get_training_data(t_data=sample, time_step = time, reverse=False)
+            #print(x.shape,y.shape)
             yield x,y
     def save(self, path='', name=''):
         '''
