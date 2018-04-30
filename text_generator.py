@@ -322,12 +322,12 @@ class WordGenerator:
             if flag:
                 index = 0
                 sample = data[index:index+batch]
-                index += 1
+                index += batch
                 flag = False
                 #print("Hello2")
             else:
                 sample = data[index:index+batch]
-                index += 1
+                index += batch
             if len(sample)<(time+2):
                 #print("Hello")
                 sample = data[-(batch):]
