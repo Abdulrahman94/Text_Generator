@@ -574,19 +574,27 @@ def get_prediction(forward_gen, backward_gen, sentence):
         f_set = forward_gen.predict_word(forward)
         b_set = backward_gen.predict_word(backward)
     num = 0
+    result_set = []
+    n_sum = 0
     for i in f_set:
         for j in b_set:
             if i[1] >= j[1]:
-                result += '{0}- {1} بنسبة {2:.2f} \n'.format(num+1, i[0], 100*i[1])
+                #result += '{0}- {1} بنسبة {2:.2f} \n'.format(num+1, i[0], 100*i[1])
+                result_set.append((i[0],i[1]))
+                n_sum += i[1]
                 num += 1
                 break
             else:
-                result += '{0}- {1} بنسبة {2:.2f} \n'.format(num+1, j[0], 100*j[1])
+                #result += '{0}- {1} بنسبة {2:.2f} \n'.format(num+1, j[0], 100*j[1])
+                result_set.append((j[0],j[1]))
+                n_sum += j[1]
                 num += 1
             if num == 5:
                 break
         if num == 5:
                 break
+    for x in result_set:
+        result += '{0}\tبنسبة\t{1:.2f}%\n'.format(x[0], 100*(x[1]/n_sum))
     return result
 
 
