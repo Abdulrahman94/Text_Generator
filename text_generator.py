@@ -554,7 +554,22 @@ def get_prediction(forward_gen, backward_gen, sentence):
     try:
         index = s.index('__')
     except ValueError:
-        return 'حدث خطأ: ليس هنالك أي كلمة مفقودة'
+        if len(s) == 0:
+            return 'حدث خطأ: ليس هنالك أي كلمة'
+        else:
+            f_set = []
+            result = ''
+            for i in s:
+                if i == 'END':
+                    result += '. '
+                elif i != 'START':
+                    result += i + ' '
+            result += '\n'
+            f_set = forward_gen.predict_word(s)
+            for x in f_set:
+                result += '\t[%{1:.2f}]\t\t[{0}]\n'.format(x[0], 100*(x[1]))
+            return result
+            
     f_set = []
     b_set = []
     result = ''
